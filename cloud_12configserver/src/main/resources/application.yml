@@ -1,0 +1,32 @@
+server:
+  port: 8848
+  compression:
+    enabled: true
+spring:
+  application:
+    name: CONFIGSERVER
+  # consul server 注册
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+  # 指定当前服务注册名 默认${spring.application.name}
+      discovery:
+        service-name: ${spring.application.name}
+  # 配置远程仓库的地址 仓库需公开 不然会有权限校验问题 导致无法启动服务
+  # 每一个服务都可以作为 配置的client，A服务（具体的业务服务）对config server来说 就算一个config client
+    config:
+      server:
+        git:
+          uri: https://gitee.com/xuelijun_dev/configs.git
+          default-label: master
+#          username: xuelijun_dev
+#          password: x13229223989
+  # 配置消息队列连接信息 这段配置应该放在远端仓库去管理
+  rabbitmq:
+    host: 1.14.133.171
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: /
+

@@ -1,0 +1,17 @@
+server:
+  port: 8082
+  compression:
+    enabled: true
+spring:
+  application:
+    name: CONSUL_CLIENT
+  # consul server 注册
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      # 指定当前服务注册名 默认${spring.application.name}
+      discovery:
+        service-name: ${spring.application.name}
+        # 关闭健康检查 不建议关闭
+        # register-health-check: false
